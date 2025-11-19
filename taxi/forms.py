@@ -19,8 +19,11 @@ class DriverCreationForm(UserCreationForm):
                 " followed by 5 digits, e.g. ABC12345."
             )
 
-        if Driver.objects.filter(license_number=license_number).exclude(pk=self.instance.pk).exists():
-            raise forms.ValidationError("This license number is already in use.")
+        if (Driver.objects.filter(license_number=license_number).
+                exclude(pk=self.instance.pk).exists()):
+            raise forms.ValidationError(
+                "This license number is already in use."
+            )
 
         return license_number
 
@@ -38,8 +41,11 @@ class DriverUpdateForm(UserChangeForm):
                 " followed by 5 digits, e.g. ABC12345."
             )
 
-        if Driver.objects.filter(license_number=license_number).exclude(pk=self.instance.pk).exists():
-            raise forms.ValidationError("This license number is already in use.")
+        if (Driver.objects.filter(license_number=license_number).
+                exclude(pk=self.instance.pk).exists()):
+            raise forms.ValidationError(
+                "This license number is already in use."
+            )
 
         return license_number
 

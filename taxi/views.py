@@ -28,6 +28,7 @@ def index(request):
 
     return render(request, "taxi/index.html", context=context)
 
+
 @login_required
 def assign_me_to_car(request, pk):
     car = get_object_or_404(Car, pk=pk)
@@ -35,6 +36,7 @@ def assign_me_to_car(request, pk):
     if user not in car.drivers.all():
         car.drivers.add(user)
     return redirect("taxi:car-detail", pk=pk)
+
 
 @login_required
 def remove_me_from_car(request, pk):
@@ -118,6 +120,7 @@ class DriverUpdateView(LoginRequiredMixin, generic.UpdateView):
     form_class = DriverUpdateForm
     template_name = "taxi/driver_update.html"
     success_url = reverse_lazy("taxi:driver-list")
+
 
 class DriverDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Driver
